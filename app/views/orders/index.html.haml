@@ -1,0 +1,40 @@
+%h1 Working Orders
+
+%table 
+  - Order.working_orders.each do |order|
+    %tr 
+      - if order.estimate_time > Time.now
+        %td= time_ago_in_words(order.estimate_time) +' remaining' 
+      - else
+        %td= time_ago_in_words(order.estimate_time) +' overdue' 
+      %td= order.name
+      %td= order.order
+
+      %td=link_to "Completed", order_completed_path(order), method: :put, class: "btn"
+      
+
+
+%h1 New Orders
+
+%table 
+  - Order.new_orders.each do |order|
+    %tr 
+      %td= time_ago_in_words(order.created_at) +' ago'
+      %td= order.name
+      %td= order.order
+
+      %td=link_to "3", order_estimated_path(order, estimate: 3), method: :put, class: "btn"
+      %td=link_to "5", order_estimated_path(order, estimate: 5), method: :put, class: "btn"
+      %td=link_to "10", order_estimated_path(order, estimate: 10), method: :put, class: "btn"
+
+%h1 Completed Orders
+
+%table 
+  - Order.completed_orders.each do |order|
+    %tr 
+      %td= time_ago_in_words(order.completed_at) +' ago'
+      %td= order.name
+      %td= order.order
+
+      %td=link_to "Paid", order_paid_path(order), method: :put, class: "btn"
+      
