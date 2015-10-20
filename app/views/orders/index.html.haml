@@ -1,40 +1,53 @@
 %h1 Working Orders
 
-%table 
-  - Order.working_orders.each do |order|
-    %tr 
-      - if order.estimate_time > Time.now
-        %td= time_ago_in_words(order.estimate_time) +' remaining' 
-      - else
-        %td= time_ago_in_words(order.estimate_time) +' overdue' 
+%table.table.table-condensed.table-striped
+  %th Name
+  %th Order
+  %th Time remaining
+  %th
+  - @shop.orders.working.each do |order|
+    %tr
       %td= order.name
       %td= order.order
+      - if order.estimate_time > Time.now
+        %td= time_ago_in_words(order.estimate_time) 
+      - else
+        %td.text-danger= time_ago_in_words(order.estimate_time) +' overdue'
 
-      %td=link_to "Completed", order_completed_path(order), method: :put, class: "btn"
+      %td=link_to "Completed", shop_order_completed_path(@shop, order), method: :put, class: "btn btn-default"
       
-
 
 %h1 New Orders
 
-%table 
-  - Order.new_orders.each do |order|
+%table.table.table-condensed.table-striped
+  %th Name
+  %th Order
+  %th Order placed
+  %th
+  - @shop.orders.new_orders.each do |order|
     %tr 
-      %td= time_ago_in_words(order.created_at) +' ago'
       %td= order.name
       %td= order.order
+      %td= time_ago_in_words(order.created_at) +" ago"
 
-      %td=link_to "3", order_estimated_path(order, estimate: 3), method: :put, class: "btn"
-      %td=link_to "5", order_estimated_path(order, estimate: 5), method: :put, class: "btn"
-      %td=link_to "10", order_estimated_path(order, estimate: 10), method: :put, class: "btn"
+      %td
+        .btn.btn-group
+          =link_to "3", shop_order_estimated_path(@shop, order, estimate: 3), method: :put, class: "btn btn-default btn-group"
+          =link_to "5", shop_order_estimated_path(@shop, order, estimate: 5), method: :put, class: "btn btn-default btn-group"
+          =link_to "10", shop_order_estimated_path(@shop, order, estimate: 10), method: :put, class: "btn btn-default btn-group"
 
 %h1 Completed Orders
 
-%table 
-  - Order.completed_orders.each do |order|
+%table.table.table-condensed.table-striped 
+  %th Name
+  %th Order
+  %th Order completed
+  %th
+  - @shop.orders.completed.each do |order|
     %tr 
-      %td= time_ago_in_words(order.completed_at) +' ago'
       %td= order.name
       %td= order.order
+      %td= time_ago_in_words(order.completed_at) +" ago"
 
-      %td=link_to "Paid", order_paid_path(order), method: :put, class: "btn"
+      %td=link_to "Paid", shop_order_paid_path(@shop, order), method: :put, class: "btn btn-default"
       

@@ -1,7 +1,10 @@
-%h1= "Thank you, #{@order.name}"
+%h1= "Thank you, #{@order.name}" 
 
 
-Your order is being processed.
-= @order.order
+%br Your order is being processed.
+%br= @order.order
 
-= "You will receive an email at #{@order.email} when your order is finished"
+%br= "You will receive an email at #{@order.email} when your order is finished"
+
+.btn.btn-default
+  =link_to "Place another order", shops_path

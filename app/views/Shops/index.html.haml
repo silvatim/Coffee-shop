@@ -1,0 +1,24 @@
+%h1 Coffee Shops
+
+%table.table.table-condensed.table-striped
+  %th Name
+  %th Description
+  %th Place New Order
+  %th View Orders List
+
+  - @shops.each do |shop|
+    %tr
+      %td= shop.name
+      %td= shop.description
+      %td=link_to "New Order", new_shop_order_path(shop), class: "btn btn-default"
+      %td=link_to "Order List", shop_orders_path(shop), class: "btn btn-default"
+
+.navbar.navbar-inverse
+  = link_to 'Create Shop', new_shop_path, class: "btn btn-inverse"
+
+
+
+   
+       
+
+     

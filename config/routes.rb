@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   
-  root 'orders#new'
+  root 'shops#index'
 
-  resources :orders do
-     put 'completed'
-     put 'estimated'
-     put 'paid'
+  resources :shops do
+    resources :orders do
+       put 'completed'
+       put 'estimated'
+       put 'paid'
+  end     
 
   end
 
