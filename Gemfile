@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'bootstrap-sass'
 gem 'rails_12factor', group: :production
+gem 'puma'
 
 
 group :development, :test do
