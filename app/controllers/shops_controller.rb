@@ -1,4 +1,6 @@
 class ShopsController < ApplicationController
+ 
+before_action :authenticate_admin!, except:[:index]
 
 def index 
   @shops = Shop.all
@@ -13,7 +15,6 @@ def create
   @shops = Shop.all
   render 'index'
 end
-
 
 private
 

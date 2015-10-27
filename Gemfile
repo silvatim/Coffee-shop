@@ -26,11 +26,15 @@ gem 'haml'
 gem 'bootstrap-sass'
 gem 'rails_12factor', group: :production
 gem 'puma'
+gem 'simple_form'
+gem 'devise'
+gem 'stripe'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do

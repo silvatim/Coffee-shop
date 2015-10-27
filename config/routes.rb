@@ -1,15 +1,25 @@
 Rails.application.routes.draw do
   
-  root 'shops#index'
+root :to => 'shops#index'
+
+devise_for :admins
+devise_for :users
+#devise_scope :user do
+#end
+
 
   resources :shops do
     resources :orders do
        put 'completed'
        put 'estimated'
        put 'paid'
+       put 'cancel'
+       put 'forgotten'
+       put 'reject'
+   
   end     
 
-  end
+ end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

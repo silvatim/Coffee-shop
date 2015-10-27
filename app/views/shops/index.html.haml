@@ -1,20 +1,25 @@
-%h1 Coffee Shops
+%h1.center.jumbotron Coffee Shops
 
 %table.table.table-condensed.table-striped
   %th Name
   %th Description
-  %th Place New Order
-  %th View Orders List
+  - if admin_signed_in?
+    %th View Orders List
+  - else
+    %th Place New Order
 
   - @shops.each do |shop|
     %tr
       %td= shop.name
       %td= shop.description
-      %td=link_to "New Order", new_shop_order_path(shop), class: "btn btn-default"
-      %td=link_to "Order List", shop_orders_path(shop), class: "btn btn-default"
+      - if admin_signed_in?
+        %td=link_to "Order List", shop_orders_path(shop), class: "btn btn-default"
+      - else
+        %td=link_to "New Order", new_shop_order_path(shop), class: "btn btn-default"
+      
 
-.navbar.navbar-inverse
-  = link_to 'Create Shop', new_shop_path, class: "btn btn-inverse"
+
+  
 
 
 

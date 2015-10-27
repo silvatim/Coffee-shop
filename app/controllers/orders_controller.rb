@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+before_action :authenticate_admin!, except:[:new, :create]
 
 def new
   @shop = Shop.find(params[:shop_id])
@@ -9,7 +10,27 @@ end
 def create 
   @shop = Shop.find(params[:shop_id])
   @order = @shop.orders.create(order_params)
+  UserMailer.order_email(@order).deliver_now
+
+  @amount = 500
+
+  customer = Stripe::Customer.create(
+    :email => 'example@stripe.com',
+    :card  => params[:stripeToken]
+  )
+
+  charge = Stripe::Charge.create(
+    :customer    => customer.id,
+    :amount      => @amount,
+    :description => 'Rails Stripe customer',
+    :currency    => 'usd'
+  )
+
+rescue Stripe::CardError => e
+  flash[:error] = e.message
+  redirect_to new_shop_order_path(@shop)
 end
+
 
 def index
   @shop = Shop.find(params[:shop_id])
@@ -34,9 +55,31 @@ def estimated
   @order = Order.find(params[:order_id])
   @order.estimate!(params[:estimate])
   @shop = Shop.find(params[:shop_id])
+  UserMailer.confirmation_email(@order).deliver_now
   render 'index'
 end
 
+def reject
+  @order = Order.find(params[:order_id])
+  @order.reject!
+  @shop = Shop.find(params[:shop_id])
+  UserMailer.rejection_email(@order).deliver_now
+  render 'index'
+end
+
+def cancel
+  @order = Order.find(params[:order_id])
+  @order.cancel!
+  @shop = Shop.find(params[:shop_id])
+  render 'index'
+end
+
+def forgotten
+  @order = Order.find(params[:order_id])
+  @order.forget!
+  @shop = Shop.find(params[:shop_id])
+  render 'index'
+end
 
 private
 

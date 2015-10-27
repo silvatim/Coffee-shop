@@ -2,9 +2,12 @@
 
 
 %br Your order is being processed.
-%br= @order.order
+%br
+%h3= @order.order
 
 %br= "You will receive an email at #{@order.email} when your order is finished"
-
+%br
 .btn.btn-default
   =link_to "Place another order", shops_path
+
+

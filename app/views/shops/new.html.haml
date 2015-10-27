@@ -1,12 +1,8 @@
-%h1 Add Coffee shops
+%h1.center.jumbotron Add Coffee Shop
 
-.form-horizontal.form-group
-= form_for @shop do |f|
-  .form-group
-    = f.label :name 
-    = f.text_field :name, size: 40, autofocus: true 
-  .form-group
-    = f.label :description
-    = f.text_area :description, cols: 40, rows: 7
-    %p
-    = f.submit
+%form.form-horizontal.form-group 
+= simple_form_for @shop do |f|
+  = f.input :name, placeholder: 'name'
+  = f.input :description, cols: 40, rows: 7, placeholder: "Shop description"
+  = f.button :submit 
+

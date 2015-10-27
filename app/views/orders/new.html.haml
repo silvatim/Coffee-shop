@@ -1,17 +1,9 @@
-%h1 Coffee Orders
+%h1.center.jumbotron Coffee Orders
 
-%form
-= form_for [@shop, @order] do |f|
+%form.form-horizontal.form-group
+= simple_form_for [@shop, @order] do |f|
   .form-group
-    = f.label :name 
-    = f.text_field :name, size: 40, autofocus: true 
-  .form-group
-    = f.label :email
-    = f.text_field :email, size: 40
-  .form-group
-    = f.label :order  
-    = f.text_area :order, col: 40, rows:3
-  %p
-    = f.submit
-
-
+    = f.input :name, size: 40, autofocus: true, placeholder: 'name' 
+    = f.input :email, size: 40, placeholder: 'email'
+    = f.input :order, size: 40, placeholder: "What would you like?" 
+    %script{src: "https://checkout.stripe.com/checkout.js", class: "stripe-button", "data-key" => Rails.configuration.stripe[:publishable_key], "data-description" => "Coffee Payment", "data-amount" => "500", "data-locale" => "auto"}
