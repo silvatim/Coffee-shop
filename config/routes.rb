@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   
-root :to => 'shops#index'
+root 'shops#index'
 
 devise_for :admins
 devise_for :users
 #devise_scope :user do
+ # root :to => 'shops#index'
 #end
 
 
