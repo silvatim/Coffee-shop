@@ -5,7 +5,7 @@
 
 body {
     font-family: 'Josefin Sans', sans-serif;
-    background: url('brick.jpg') no-repeat center center fixed;
+    background: asset-url('brick.jpg') no-repeat center center fixed;
     background-size: cover;
     }
 
@@ -68,7 +68,7 @@ form {
 margin: 0 auto;
 margin-top: 100px;
 padding: 30px 30px 30px 30px;
-background: url('dark_wall');
+background: asset-url('dark_wall');
 border:1px solid rgba(0,0,0,1);
 box-shadow: 20px 20px 5px 6px rgba(0, 0, 0, 0.4);
 width: 480px;
@@ -161,7 +161,7 @@ table {
   margin-top: 50px;
   color:#6E6E6E;
   padding: 30px 30px 30px 30px;
-  background:url('dark_wall.png');
+  background: asset-url('dark_wall.png');
   border: 1px solid #000000; 
   box-shadow: 20px 20px 2px -2px rgba(0,0,0,0.4);
   font-size: 18px;
