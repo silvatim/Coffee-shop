@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
   
 root 'shops#index'
-
-devise_for :admins
-devise_for :users
-#devise_scope :user do
- # root :to => 'shops#index'
-#end
-
-
+  
+ devise_for :admins
+ devise_for :users
+    
   resources :shops do
+    get 'orders/fulfilled' => 'orders#fulfilled_orders', as: :orders_fulfilled
     resources :orders do
        put 'completed'
        put 'estimated'

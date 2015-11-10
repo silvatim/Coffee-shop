@@ -1,22 +1,27 @@
-%h1.center.jumbotron Coffee Shops
+%h1.center Konoha Coffee Locations
 
-%table.table.table-condensed.table-striped
-  %th Name
-  %th Description
-  - if admin_signed_in?
-    %th View Orders List
-  - else
-    %th Place New Order
-
+%table.table.table-condensed
+  %th Address
+  %th State
+  %th Suburb
+  %th Postcode
+  %th Place New Order
+  -if admin_signed_in?
+    %th Current Orders List
+    %th Completed Orders List
+    %th Edit Shop
+   
   - @shops.each do |shop|
     %tr
-      %td= shop.name
-      %td= shop.description
-      - if admin_signed_in?
-        %td=link_to "Order List", shop_orders_path(shop), class: "btn btn-default"
-      - else
-        %td=link_to "New Order", new_shop_order_path(shop), class: "btn btn-default"
-      
+      %td= "#{shop.street_num} #{shop.street}" 
+      %td= shop.suburb
+      %td= shop.state
+      %td= shop.postcode
+      %td=link_to "New Order", new_shop_order_path(shop), class: "btn btn-default"
+      -if admin_signed_in?
+        %td=link_to "Current Orders", shop_orders_path(shop), class: "btn btn-default" 
+        %td=link_to "Completed Orders", shop_orders_fulfilled_path(shop), class: "btn btn-default"
+        %td=link_to "Edit Shop", edit_shop_path(shop), class: "btn btn-default"
 
 
   

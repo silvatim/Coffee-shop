@@ -1,9 +1,15 @@
-%h1.center.jumbotron Coffee Orders
-
-%form.form-horizontal.form-group
 = simple_form_for [@shop, @order] do |f|
+  %h1.formheading Coffee Orders
+  %p Fill in the type of coffee you would like.
   .form-group
-    = f.input :name, size: 40, autofocus: true, placeholder: 'name' 
-    = f.input :email, size: 40, placeholder: 'email'
-    = f.input :order, size: 40, placeholder: "What would you like?" 
-    %script{src: "https://checkout.stripe.com/checkout.js", class: "stripe-button", "data-key" => Rails.configuration.stripe[:publishable_key], "data-description" => "Coffee Payment", "data-amount" => "500", "data-locale" => "auto"}
+  = f.input :name, autofocus: true, placeholder: 'name' , label: false
+  = f.input :email, placeholder: 'email', label: false
+  = f.input :coffee_type, collection: Order::COFFEE_TYPE, prompt: "Select Coffee", label: false
+  = f.input :milk, collection: Order::MILK, prompt: "Select Milk", label: false 
+  = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, label: false
+  = f.input :pickup_time, as: :time
+  = f.input :comment, placeholder: "Additional comments", label: false
+  %script{src: "https://checkout.stripe.com/checkout.js", class: "stripe-button", "data-key" => Rails.configuration.stripe[:publishable_key], "data-description" => "Coffee Payment", "data-amount" => "500", "data-locale" => "auto"}
+
+
+  

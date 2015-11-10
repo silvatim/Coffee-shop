@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
 
-before_action :authenticate_admin!, except:[:new, :create]
-
 def new
   @shop = Shop.find(params[:shop_id])
   @order = Order.new
@@ -33,6 +31,10 @@ end
 
 
 def index
+  @shop = Shop.find(params[:shop_id])
+end
+
+def fulfilled_orders
   @shop = Shop.find(params[:shop_id])
 end
 
@@ -84,7 +86,7 @@ end
 private
 
 def order_params
-  params.require(:order).permit(:name, :email, :order)
+  params.require(:order).permit(:name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
 end
 
 end

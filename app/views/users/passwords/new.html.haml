@@ -1,0 +1,6 @@
+= simple_form_for(resource, as: resource_name, url: password_path(resource_name)) do |f|
+  = f.error_notification
+  %h1 Forgot your password?
+  = f.input :email, required: true, placeholder: 'email', autofocus: true, label: false  
+  = f.button :submit, "Send me reset password instructions"
+  = render "users/shared/links"

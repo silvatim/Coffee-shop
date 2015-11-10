@@ -1,15 +1,14 @@
 %h2 Working Orders
-
-%table.table.table-condensed.table-striped
-  %th Name
-  %th Order
-  %th Time remaining
-  %th
-  %th
+%table.table.table-condensed
+  %th.h3 Name
+  %th.h3 Coffee
+  %th.h3 Time remaining
+  %th.h3 Mark as completed
+  %th.h3 Cancel order
   - @shop.orders.working.each do |order|
     %tr
       %td= order.name
-      %td= order.order
+      %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
       - if order.estimate_time > Time.now
         %td= time_ago_in_words(order.estimate_time) 
       - else
@@ -20,53 +19,21 @@
         =link_to "Cancel", shop_order_cancel_path(@shop, order), method: :put , class: "btn btn-default"
 
 %h2 New Orders
-%table.table.table-condensed.table-striped 
-  %th Name
-  %th Order
-  %th Order placed
-  %th
-  %th
+%table.table.table-condensed 
+  %th.h3 Name
+  %th.h3 Coffee
+  %th.h3 Order placed
+  %th.h3 Estimated pickup time
+  %th.h3 Reject order
   - @shop.orders.new_orders.each do |order|
     %tr 
       %td= order.name
-      %td= order.order
+      %td= "#{order.coffee_type} / #{order.milk} / #{order.size}"
       %td= time_ago_in_words(order.created_at) +" ago"
       %td
-        .btn.btn-group
-          =link_to "3", shop_order_estimated_path(@shop, order, estimate: 3), method: :put, class: "btn btn-default btn-group"
-          =link_to "5", shop_order_estimated_path(@shop, order, estimate: 5), method: :put, class: "btn btn-default btn-group"
-          =link_to "10", shop_order_estimated_path(@shop, order, estimate: 10), method: :put, class: "btn btn-default btn-group"
-        %td  
-          =link_to "Reject", shop_order_reject_path(@shop, order), method: :put, class: "btn btn-default"
-
-%h2 Completed Orders
-%table.table.table-condensed.table-striped
-  %th Name
-  %th Order
-  %th Order completed
-  %th
-  %th
-  - @shop.orders.completed.each do |order|
-    %tr 
-      %td= order.name
-      %td= order.order
-      %td= time_ago_in_words(order.completed_at) +" ago"
+        =link_to "3 min", shop_order_estimated_path(@shop, order, estimate: 3), method: :put, class: "btn"
+        =link_to "5 min", shop_order_estimated_path(@shop, order, estimate: 5), method: :put, class: "btn"
+        =link_to "10 min", shop_order_estimated_path(@shop, order, estimate: 10), method: :put, class: "btn"
       %td
-        =link_to "Picked up", shop_order_paid_path(@shop, order), method: :put, class: "btn btn-default"
-      %td  
-        =link_to "Forgotten", shop_order_forgotten_path(@shop, order), method: :put, class: "btn btn-default"
+        =link_to "Reject", shop_order_reject_path(@shop, order), method: :put, class: "btn btn-default"
 
-%h2 Discarded Orders
-%table.table.table-condensed.table-striped 
-  %th Name
-  %th Order
-  %th Order discarded
-  %th State
-  - @shop.orders.discarded.each do |order|
-    %tr 
-      %td= order.name
-      %td= order.order
-      %td= time_ago_in_words(order.completed_at) +" ago"
-      %td= order.state
-
-      

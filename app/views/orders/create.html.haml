@@ -1,13 +1,14 @@
-%h1= "Thank you, #{@order.name}" 
+%form
+  %h1= "Thank you, #{@order.name}" 
 
+  %p Your order is being processed.
+  %br
+  %p= "#{@order.size} #{@order.coffee_type} with #{@order.milk}"
 
-%br Your order is being processed.
-%br
-%h3= @order.order
-
-%br= "You will receive an email at #{@order.email} when your order is finished"
-%br
-.btn.btn-default
-  =link_to "Place another order", shops_path
+  %br
+  %p= "You will receive an email at #{@order.email} once your order is confirmed"
+  %br
+  .btn
+    =link_to "Place another order", shops_path
 
 

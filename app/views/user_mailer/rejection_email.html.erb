@@ -6,7 +6,7 @@
   <body>
     <h1>Sorry: <%= @order.name %></h1>
     <p>
-      You order: <%= @order.order %>.<br>
+     <%= "Your order : #{@order.size} #{@order.coffee_type} with #{@order.milk}" %>.<br>
     </p>
     <p>Is unfortunately unable to be completed at this time due to .....</p>
   </body>

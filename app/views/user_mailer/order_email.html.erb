@@ -4,9 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to CoffeeApp.com, <%= @order.name %></h1>
+    <h1>Welcome to Konoha Coffee, <%= @order.name %></h1>
     <p>
-      You have ordered a: <%= @order.order %>.<br>
+      <%= "Your order : #{@order.size} #{@order.coffee_type} with #{@order.milk}" %>.<br>
     </p>
     <p>Thanks for ordering - please await a confirmation email and have a great day!</p>
   </body>

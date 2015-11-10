@@ -1,10 +1,11 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header>
+ <div class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to 'Coffee Shop App', new_user_registration_path , id: "logo"%>
+   <h4><%= link_to 'Konoha Coffee', new_user_registration_path , id: "logo"%></h4>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? || admin_signed_in? %>
-          <li><%= link_to 'Account settings', '#' %></li>
+          <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
           <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
          <%else%>
           <li><%= link_to "Create Account", new_user_registration_path %></li>
@@ -12,6 +13,7 @@
          <%end%>
       </ul>
     </nav>
+   </div>
   </div>
 </header>
   
