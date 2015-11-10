@@ -1,15 +1,15 @@
 %h1.center Konoha Coffee Locations
 
 %table.table.table-condensed
-  %th Address
-  %th State
-  %th Suburb
-  %th Postcode
-  %th Place New Order
+  %th.h3 Address
+  %th.h3 State
+  %th.h3 Suburb
+  %th.h3 Postcode
+  %th.h3 Place New Order
   -if admin_signed_in?
-    %th Current Orders List
-    %th Completed Orders List
-    %th Edit Shop
+    %th.h3 Current Orders List
+    %th.h3 Completed Orders List
+    %th.h3 Edit Shop
    
   - @shops.each do |shop|
     %tr
