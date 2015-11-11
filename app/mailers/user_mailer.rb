@@ -8,7 +8,6 @@ class UserMailer < ApplicationMailer
     mail(to: @order.email, from: ENV['GMAIL_USERNAME'], subject: 'Your Coffee Order')
   end
 
-
   def confirmation_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'
