@@ -5,20 +5,20 @@ class UserMailer < ApplicationMailer
   def order_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'
-    mail(to: @order.email, subject: 'Your Coffee Order')
+    mail(to: @order.email, from: ENV['GMAIL_USERNAME'], subject: 'Your Coffee Order')
   end
 
 
   def confirmation_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'
-    mail(to: @order.email, subject: 'Order Confirmation')
+    mail(to: @order.email, from: ENV['GMAIL_USERNAME'], subject: 'Order Confirmation')
   end
 
   def rejection_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'
-    mail(to: @order.email, subject: 'Order Rejection')
+    mail(to: @order.email, from: ENV['GMAIL_USERNAME'], subject: 'Order Rejection')
   end
 
 end
