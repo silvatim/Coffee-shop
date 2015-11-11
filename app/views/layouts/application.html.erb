@@ -10,15 +10,17 @@
 <body >
   <%= render 'layouts/header' %>	
 
-<div class='container'>
-
-  <% if notice %>
+     <% if notice %>
     <p class="alert alert-success"><%= notice %></p>
   <% end %>
 
+<div class="container">
+
   
 	<%= yield %>
-</div>
+  
+  </div>
+
 
 </body>
 </html>
