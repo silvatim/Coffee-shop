@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-   default from: ENV['GMAIL_USERNAME']
+   default from: 'railstestacc@gmail.com'
  
   def order_email(order)
     @order = order
