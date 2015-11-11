@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-   default from: 'railstestacc@gmail.com'
+   default from: ENV['GMAIL_USERNAME']
  
   def order_email(order)
     @order = order
@@ -18,7 +18,7 @@ class UserMailer < ApplicationMailer
   def rejection_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'
-    mail(to: @order.email, subject: 'Order Confirmation')
+    mail(to: @order.email, subject: 'Order Rejection')
   end
 
 end
