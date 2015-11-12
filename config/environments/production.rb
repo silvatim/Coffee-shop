@@ -19,6 +19,7 @@ Rails.application.configure do
   # For large-scale production use, consider using a caching reverse proxy like
   # NGINX, varnish or squid.
   # config.action_dispatch.rack_cache = true
+  config.action_mailer.default_url_options = { host: 'timscoffeeshop.heroku.com'}
   config.assets.raise_runtime_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

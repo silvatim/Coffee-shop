@@ -42,6 +42,7 @@ def completed
   @order = Order.find(params[:order_id])
   @order.complete!
   @shop = Shop.find(params[:shop_id])
+  UserMailer.completed_email(@order).deliver_now
   render 'index'
 end
 

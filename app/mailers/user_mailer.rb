@@ -14,6 +14,13 @@ class UserMailer < ApplicationMailer
     mail(to: @order.email, subject: 'Order Confirmation')
   end
 
+  def completed_email(order)
+    @order = order
+    @url  = 'http://coffeeapp.com/login'
+    mail(to: @order.email, subject: 'Your Order is Ready!')
+  end
+
+
   def rejection_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'

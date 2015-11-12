@@ -30,7 +30,7 @@ Rails.application.configure do
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
-  config.action_mailer.default_url_options = { host: 'timscoffeeshop.heroku.com'}
+  config.action_mailer.default_url_options = { host: 'localhost:3000'}
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
@@ -38,11 +38,11 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address:              'smtp.sendgrid.net',
+  address:              'smtp.gmail.com',
   port:                 '587',
-  domain:               'heroku.com',
-  user_name:             ENV['SENDGRID_USERNAME'],
-  password:              ENV['SENDGRID_PASSWORD'],
+  domain:               'gmail.com',
+  user_name:             ENV['GMAIL_USERNAME'],
+  password:              ENV['GMAIL_PASS'],
   authentication:       'plain',
   enable_starttls_auto: true  
   } 

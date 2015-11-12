@@ -3,8 +3,4 @@ Thanks for your: <%= @order.name %>
  
 Your order of: <%= @order.coffee_type %>.
 
-It will be ready in approximately 5 minutes.
- 
-To login to the site, just follow this link: <%= @url %>.
- 
-Thanks for ordering and have a great day!
+Will be ready to pickup in <%= distance_of_time_in_words(Time.now, @order.estimate_time) %>
