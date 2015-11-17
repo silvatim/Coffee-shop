@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
 before_action :set_shop
-
+before_action :set_order, except: [:index, :new, :create]
 
 def index
   @orders = @shop.orders
@@ -86,6 +86,9 @@ private
     @shop = Shop.find(params[:shop_id])
   end
 
+  def set_order
+    @order = @shop.orders.find(params[:order_id])
+  end
   
 end
 

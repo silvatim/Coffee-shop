@@ -23,6 +23,7 @@ class Order < ActiveRecord::Base
 	def estimate!(estimate)
 	  update_attributes({estimate_taken: Time.now, estimate_given: estimate, state: 'working'})
 	end
+
 	
 	def paid!
 	  update_attributes({finished_at: Time.now, state: 'paid'})
@@ -33,15 +34,15 @@ class Order < ActiveRecord::Base
 	end
 
 	def reject!
-		update_attributes({completed_at: Time.now, state: 'rejected'})
+	  update_attributes({completed_at: Time.now, state: 'rejected'})
 	end
 
 	def cancel!
-		update_attributes({completed_at: Time.now, state: 'cancelled'})
+	  update_attributes({completed_at: Time.now, state: 'cancelled'})
 	end
 
 	def forget!
-		update_attributes({completed_at: Time.now, state: 'forgotten'})
+	  update_attributes({completed_at: Time.now, state: 'forgotten'})
 	end
 
 	def estimate_time

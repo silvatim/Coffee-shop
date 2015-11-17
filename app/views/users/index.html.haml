@@ -12,10 +12,15 @@
         %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
         %td= "#{order.shop.street_num} #{order.shop.street}, #{order.shop.suburb}, #{order.shop.state}"
         %td= order.state
-        %td   
-          =link_to "Cancel order", cancel_user_order_path(@user, order), method: :delete, class: "btn btn-default"
-        %td
-          =link_to "Change order", edit_user_order_path(@user, order), method: :get, class: "btn btn-default"
+        - if order_new(order)
+          %td   
+            =link_to "Cancel order", cancel_user_order_path(@user, order), method: :delete, class: "btn btn-default"
+          %td
+            =link_to "Change order", edit_user_order_path(@user, order), method: :get, class: "btn btn-default"
+        - else 
+          %td Order in progress.... 
+          %td Unable to cancel or change
+
 - else
   %h3.center= "No orders exist currently for #{@user.first_name}"
      
