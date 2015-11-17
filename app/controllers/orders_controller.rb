@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
 before_action :set_shop
-before_action :set_order, except: [:index, :new, :create]
+before_action :set_order, except: [:index, :new, :create, :fulfilled_orders]
 
 def index
   @orders = @shop.orders

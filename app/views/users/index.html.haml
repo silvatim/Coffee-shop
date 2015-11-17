@@ -19,7 +19,7 @@
             =link_to "Change order", edit_user_order_path(@user, order), method: :get, class: "btn btn-default"
         - else 
           %td Order in progress.... 
-          %td Unable to cancel or change
+          %td Unable to cancel or change order
 
 - else
   %h3.center= "No orders exist currently for #{@user.first_name}"

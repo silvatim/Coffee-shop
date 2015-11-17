@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-root 'shops#index'
+
 
 devise_for :users 
-
+ root 'shops#index'
 
 get 'users/:user_id/orders' => 'users#index', as: :user_orders
 get 'users/:user_id/orders/:id' => 'users#show_order', as: :user_order
