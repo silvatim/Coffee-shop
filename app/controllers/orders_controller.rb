@@ -1,13 +1,22 @@
 class OrdersController < ApplicationController
 
+before_action :set_shop
+
+
+def index
+  @orders = @shop.orders
+end
+
 def new
-  @shop = Shop.find(params[:shop_id])
-  @order = Order.new
+  @order = @shop.orders.new
+  @order.user = current_user 
 end
 
 def create 
-  @shop = Shop.find(params[:shop_id])
-  @order = @shop.orders.create(order_params)
+  @order = @shop.orders.new(order_params)
+  @order.user = current_user if user_signed_in?
+  @order.save
+
   UserMailer.order_email(@order).deliver_now
 
   @amount = 500
@@ -23,73 +32,60 @@ def create
     :description => 'Rails Stripe customer',
     :currency    => 'usd'
   )
+  
+    rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_shop_order_path(@shop)
 
-rescue Stripe::CardError => e
-  flash[:error] = e.message
-  redirect_to new_shop_order_path(@shop)
-end
-
-
-def index
-  @shop = Shop.find(params[:shop_id])
 end
 
 def fulfilled_orders
-  @shop = Shop.find(params[:shop_id])
 end
 
 def completed
-  @order = Order.find(params[:order_id])
   @order.complete!
-  @shop = Shop.find(params[:shop_id])
   UserMailer.completed_email(@order).deliver_now
   render 'index'
 end
 
 
 def paid
-  @order = Order.find(params[:order_id])
   @order.paid!
-  @shop = Shop.find(params[:shop_id])
   render 'index'
 end
 
 def estimated
-  @order = Order.find(params[:order_id])
   @order.estimate!(params[:estimate])
-  @shop = Shop.find(params[:shop_id])
   UserMailer.confirmation_email(@order).deliver_now
   render 'index'
 end
 
 def reject
-  @order = Order.find(params[:order_id])
   @order.reject!
-  @shop = Shop.find(params[:shop_id])
   UserMailer.rejection_email(@order).deliver_now
   render 'index'
 end
 
 def cancel
-  @order = Order.find(params[:order_id])
   @order.cancel!
-  @shop = Shop.find(params[:shop_id])
   render 'index'
 end
 
 def forgotten
-  @order = Order.find(params[:order_id])
   @order.forget!
-  @shop = Shop.find(params[:shop_id])
   render 'index'
 end
 
 private
 
-def order_params
-  params.require(:order).permit(:name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
-end
+  def order_params
+    params.require(:order).permit(:first_name, :last_name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
+  end
 
-end
+  def set_shop
+    @shop = Shop.find(params[:shop_id])
+  end
 
+  
+end
 

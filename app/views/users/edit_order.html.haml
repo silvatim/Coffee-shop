@@ -1,0 +1,17 @@
+= simple_form_for [@user, @order] do |f|
+  %h1.formheading Current Order
+  %p Change your order
+  .form-group
+  = f.input :first_name, label: false, autofocus: true, placeholder: 'name'
+  = f.input :last_name, label: false, placeholder: 'last name'
+  = f.input :email, label: false, placeholder: 'email' 
+  = f.input :coffee_type, autofocus: true, collection: Order::COFFEE_TYPE, prompt: "Select Coffee", label: false
+  = f.input :milk, collection: Order::MILK, prompt: "Select Milk", label: false 
+  = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, label: false
+  = f.input :pickup_time, as: :time
+  = f.input :comment, placeholder: "Additional comments", label: false
+  = f.submit
+  
+
+
+  

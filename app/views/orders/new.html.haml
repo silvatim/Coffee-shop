@@ -2,9 +2,15 @@
   %h1.formheading Coffee Orders
   %p Fill in the type of coffee you would like.
   .form-group
-  = f.input :name, autofocus: true, placeholder: 'name' , label: false
-  = f.input :email, placeholder: 'email', label: false
-  = f.input :coffee_type, collection: Order::COFFEE_TYPE, prompt: "Select Coffee", label: false
+  - if user_signed_in?
+    = f.input :first_name, label: false, input_html: {:value => @order.user.first_name}
+    = f.input :last_name, label: false, input_html: {:value => @order.user.last_name}
+    = f.input :email, label: false, input_html: {:value => @order.user.email}
+  - else
+    = f.input :first_name, label: false, autofocus: true, placeholder: 'name'
+    = f.input :last_name, label: false, placeholder: 'last name'
+    = f.input :email, label: false, placeholder: 'email' 
+  = f.input :coffee_type, autofocus: true, collection: Order::COFFEE_TYPE, prompt: "Select Coffee", label: false
   = f.input :milk, collection: Order::MILK, prompt: "Select Milk", label: false 
   = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, label: false
   = f.input :pickup_time, as: :time

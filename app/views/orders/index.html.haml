@@ -7,7 +7,7 @@
   %th.h3 Cancel order
   - @shop.orders.working.each do |order|
     %tr
-      %td= order.name
+      %td= order.first_name
       %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
       - if order.estimate_time > Time.now
         %td= time_ago_in_words(order.estimate_time) 
@@ -27,7 +27,7 @@
   %th.h3 Reject order
   - @shop.orders.new_orders.each do |order|
     %tr 
-      %td= order.name
+      %td= order.first_name
       %td= "#{order.coffee_type} / #{order.milk} / #{order.size}"
       %td= time_ago_in_words(order.created_at) +" ago"
       %td

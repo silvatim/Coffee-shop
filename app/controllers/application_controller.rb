@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update).push(:first_name, :last_name, :password_confirmation)
   end
 
+  def current_user_admin?  
+    current_user && current_user.admin?
+  end
+  
+  helper_method :current_user_admin?
+
 end

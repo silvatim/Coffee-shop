@@ -1,13 +1,14 @@
 class Order < ActiveRecord::Base
     
-    
 	belongs_to :shop
+	belongs_to :user
 
 	COFFEE_TYPE = ['Expresso', 'Cappuccino', 'Flat White', 'Latte Mocha', 'Macchiato']
 	MILK = ['Regular milk','Low fat milk','Soy milk','Almond milk']
     SIZE = ['Large','Medium','Small']
 
-	validates :name, presence: true
+	validates :first_name, presence: true
+	validates :last_name, presence: true
 	validates :email, presence: true, format: /\A\S+@\S+\z/
     validates :coffee_type, inclusion: { in: COFFEE_TYPE } 
     validates :milk, inclusion: { in: MILK }

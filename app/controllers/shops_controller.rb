@@ -1,8 +1,11 @@
 class ShopsController < ApplicationController
 
+before_action :set_shop, only: [:edit, :update, :destroy]
+before_action :set_all_shops, except: [:new, :edit]
+
 
 def index 
-  @shops = Shop.all
+  @user = current_user
 end
 
 def new
@@ -11,7 +14,6 @@ end
 
 def create
   @shop = Shop.create(shop_params)
-  @shops = Shop.all
   if @shop.save
     render 'index', notice: "Shop successfully created"
   else
@@ -20,12 +22,9 @@ def create
 end
 
 def edit
-  @shop = Shop.find(params[:id])
 end
 
 def update
-  @shop = Shop.find(params[:id])
-  @shops = Shop.all
   if @shop.update(shop_params)
   	render 'index', notice: "Shop successfully updated"
   else
@@ -34,8 +33,6 @@ def update
 end
 
 def destroy
-  @shop = Shop.find(params[:id])
-  @shops = Shop.all
   @shop.destroy
   render 'index', notice: "Shop successfully deleted"
 end
@@ -43,8 +40,15 @@ end
 
 private
 
-def shop_params
-  params.require(:shop).permit(:street_num, :street, :suburb, :state, :postcode)
-end
+  def shop_params
+    params.require(:shop).permit(:street_num, :street, :suburb, :state, :postcode)
+  end
 
+  def set_shop
+    @shop = Shop.find(params[:id])
+  end
+
+  def set_all_shops
+    @shops = Shop.all
+  end
 end
