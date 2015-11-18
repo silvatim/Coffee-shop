@@ -2,10 +2,10 @@ class UsersController < ApplicationController
 
 before_action :set_user
 before_action :set_order, except: [:index]
-  
+
   def index
     @orders = @user.orders
-  end   
+  end
 
   def edit_order
   end
@@ -37,6 +37,6 @@ private
   def order_params
     params.require(:order).permit(:first_name, :last_name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
   end
-  
+
 end
 
