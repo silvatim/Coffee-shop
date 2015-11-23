@@ -8,6 +8,6 @@
     <p>
      <%= "Your order : #{@order.size} #{@order.coffee_type} with #{@order.milk}" %>.<br>
     </p>
-    <p>Will be ready to pickup in <%= distance_of_time_in_words(Time.now, @order.estimate_time) %></p>
+    <p>Will be ready to pickup in <%= distance_of_time_in_words(Time.now, @order.pickup_time) %></p>
   </body>
 </html> 

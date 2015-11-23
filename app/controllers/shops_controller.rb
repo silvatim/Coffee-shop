@@ -5,7 +5,7 @@ before_action :set_all_shops, except: [:new, :edit]
 
 
 def index 
-  @user = current_user
+  
 end
 
 def new
@@ -15,7 +15,7 @@ end
 def create
   @shop = Shop.create(shop_params)
   if @shop.save
-    render 'index', notice: "Shop successfully created"
+    redirect_to shops_path, notice: "Shop successfully created"
   else
     render 'new'
   end
@@ -26,15 +26,15 @@ end
 
 def update
   if @shop.update(shop_params)
-  	render 'index', notice: "Shop successfully updated"
+  	redirect_to shops_path, notice: "Shop successfully updated"
   else
-  	render :edit
+  	render 'edit'
   end
 end
 
 def destroy
   @shop.destroy
-  render 'index', notice: "Shop successfully deleted"
+  redirect_to shops_path, notice: "Shop successfully deleted"
 end
 
 
@@ -51,4 +51,5 @@ private
   def set_all_shops
     @shops = Shop.all
   end
+
 end

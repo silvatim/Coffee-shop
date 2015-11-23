@@ -8,7 +8,7 @@
   %br
   %p= "You will receive an email at #{@order.email} once your order is confirmed"
   %br
-  .btn
-    =link_to "Place another order", shops_path
-
-
+  %p
+    =link_to "Place another order", shops_path, method: :get, class: "btn btn-default"
+    =link_to "View order", '#', class: "btn btn-default"
+    =link_to "Home", '#', class: "btn btn-default"

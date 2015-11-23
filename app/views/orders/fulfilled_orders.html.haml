@@ -1,5 +1,6 @@
 %h2 Completed Orders
 %table.table.table-condensed
+  %th Surname
   %th Name
   %th Coffee
   %th Order completed
@@ -7,7 +8,8 @@
   %th
   - @shop.orders.completed.each do |order|
     %tr 
-      %td= order.name
+      %td= order.last_name
+      %td= order.first_name
       %td= "#{order.coffee_type} / #{order.milk} / #{order.size}"
       %td= time_ago_in_words(order.completed_at) +" ago"
       %td
@@ -17,13 +19,15 @@
 
 %h2 Discarded Orders
 %table.table.table-condensed
+  %th Surname
   %th Name
   %th Coffee
   %th Order discarded
   %th State
   - @shop.orders.discarded.each do |order|
     %tr 
-      %td= order.name
+      %td= order.last_name
+      %td= order.first_name
       %td= "#{order.coffee_type} / #{order.milk} / #{order.size}"
       %td= time_ago_in_words(order.completed_at) +" ago"
       %td= order.state

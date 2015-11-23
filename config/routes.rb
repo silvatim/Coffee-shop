@@ -20,6 +20,7 @@ delete 'users/:user_id/orders/:id/cancel' => 'users#cancel_order', as: :cancel_u
        put 'cancel'
        put 'forgotten'
        put 'reject'
+       put 'accept'
    
   end     
 
