@@ -159,7 +159,7 @@ input[type="submit"] {
   margin: 0 auto;
   }
 
-.checkbox, .radio, .time {
+.checkbox, .radio, .time{
     margin-left: 16px;
     color:#6E6E6E
   }
@@ -184,7 +184,6 @@ table {
     text-align: center;
     color: #FFF;
     } 
-
 
 
   @mixin disable{
@@ -232,6 +231,7 @@ table {
     color:#fff;
     text-decoration: none;
 }
+
 
 
 

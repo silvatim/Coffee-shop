@@ -3,4 +3,4 @@ Thanks for your: <%= @order.first_name %>
  
 Your order of: <%= @order.coffee_type %>.
 
-Will be ready to pickup in <%= distance_of_time_in_words(Time.now, @order.estimate_time) %>
+Will be ready to pickup in <%= distance_of_time_in_words(Time.now, @order.pickup_time) %>

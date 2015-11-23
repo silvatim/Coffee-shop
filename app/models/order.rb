@@ -7,6 +7,7 @@ class Order < ActiveRecord::Base
 	MILK = ['Regular milk','Low fat milk','Soy milk','Almond milk']
     SIZE = ['Large','Medium','Small']
 
+
 	validates :first_name, presence: true
 	validates :last_name, presence: true
 	validates :email, presence: true, format: /\A\S+@\S+\z/
@@ -20,17 +21,20 @@ class Order < ActiveRecord::Base
 	scope :new_orders, -> { where(state: 'new') }
 	scope :paid, -> { where(state: 'paid') }
 
-	def estimate!(estimate)
-	  update_attributes({estimate_taken: Time.now, estimate_given: estimate, state: 'working'})
+	def estimate!(estimate)	
+	  update_attributes({pickup_time: estimate, state: 'working'}) #estimate_taken: Time.now, estimate_given: estimate,
 	end
 
-	
 	def paid!
 	  update_attributes({finished_at: Time.now, state: 'paid'})
 	end
 
 	def complete!
 	  update_attributes({completed_at: Time.now, state: 'completed'})
+	end
+
+	def accept!
+      update_attributes({state: 'working'})
 	end
 
 	def reject!
@@ -41,12 +45,12 @@ class Order < ActiveRecord::Base
 	  update_attributes({completed_at: Time.now, state: 'cancelled'})
 	end
 
-	def forget!
+    def forgotten!
 	  update_attributes({completed_at: Time.now, state: 'forgotten'})
 	end
 
-	def estimate_time
-	  estimate_taken + estimate_given.minutes
+	def modified_pickup_time
+	  pickup_time + estimate_given.minutes
 	end
 
 end

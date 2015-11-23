@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
+helper_method :sort_column, :sort_direction
 
 before_action :set_shop
 before_action :set_order, except: [:index, :new, :create, :fulfilled_orders]
 
 def index
-  @orders = @shop.orders
+  @orders = @shop.orders.order(sort_column + " " + sort_direction)
 end
 
 def new
@@ -45,35 +46,40 @@ end
 def completed
   @order.complete!
   UserMailer.completed_email(@order).deliver_now
-  render 'index'
+  redirect_to shop_orders_path(@shop)
 end
 
 
 def paid
   @order.paid!
-  render 'index'
+  redirect_to shop_orders_path(@shop)
 end
 
 def estimated
   @order.estimate!(params[:estimate])
   UserMailer.confirmation_email(@order).deliver_now
-  render 'index'
+  redirect_to shop_orders_path(@shop)
+end
+
+def accept
+  @order.accept!
+  redirect_to shop_orders_path(@shop)
 end
 
 def reject
   @order.reject!
   UserMailer.rejection_email(@order).deliver_now
-  render 'index'
+  redirect_to shop_orders_path(@shop)
 end
 
 def cancel
   @order.cancel!
-  render 'index'
+  redirect_to shop_orders_path(@shop)
 end
 
 def forgotten
-  @order.forget!
-  render 'index'
+  @order.forgotten!
+  redirect_to shop_orders_path(@shop)
 end
 
 private
@@ -88,6 +94,14 @@ private
 
   def set_order
     @order = @shop.orders.find(params[:order_id])
+  end
+
+  def sort_column
+    @shop.orders.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 end
