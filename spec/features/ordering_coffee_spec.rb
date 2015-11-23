@@ -7,7 +7,7 @@ feature "Ordering a coffee" do
   scenario "User can order coffee without signing in" do
     visit root_path
     click_on "New Order"
-    fill_in "Name" with: "Tim"
+    fill_in "Name", with: "Tim"
     ### and the rest
 
     ##Assert email
