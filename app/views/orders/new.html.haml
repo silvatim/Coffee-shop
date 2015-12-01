@@ -7,11 +7,11 @@
     = f.input :last_name, label: false, input_html: {:value => @order.user.last_name}
     = f.input :email, label: false, input_html: {:value => @order.user.email}
   - else
-    = f.input :first_name, label: false, autofocus: true, placeholder: 'name'
-    = f.input :last_name, label: false, placeholder: 'last name'
-    = f.input :email, label: false, placeholder: 'email' 
-  = f.input :coffee_type, autofocus: true, collection: Order::COFFEE_TYPE, prompt: "Select Coffee", label: false
-  = f.input :milk, collection: Order::MILK, prompt: "Select Milk", label: false 
+    = f.input :first_name, label: false, autofocus: true, placeholder: 'Name'
+    = f.input :last_name, label: false, placeholder: 'Last name'
+    = f.input :email, label: false, placeholder: 'Email' 
+  = f.input :coffee_type, autofocus: true, collection: Order::COFFEE_TYPE, prompt: "Select coffee", label: false
+  = f.input :milk, collection: Order::MILK, prompt: "Select milk", label: false 
   = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, label: false
   = f.input :pickup_time, as: :time, ampm: true, start_hour: 7, end_hour: 18, default: Time.now
   = f.input :comment, placeholder: "Additional comments", label: false

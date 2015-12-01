@@ -9,8 +9,10 @@ def index
 end
 
 def new
-  @order = @shop.orders.new
+  @order = @shop.orders.new(size: 'Large')
   @order.user = current_user 
+  @start_time = 
+  @end_time 
 end
 
 def create 
@@ -81,6 +83,7 @@ def forgotten
   @order.forgotten!
   redirect_to shop_orders_path(@shop)
 end
+
 
 private
 
