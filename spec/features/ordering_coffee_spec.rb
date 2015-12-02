@@ -13,9 +13,9 @@ feature "Ordering a coffee" do
     visit root_path
     expect(page).to have_text("Konoha Coffee Locations")
     click_on "New Order"
-    fill_in "name", with: "Tim"
-    fill_in "last name", with: "Silva"
-    fill_in "email", with: "silva.tim@gmail.com"
+    fill_in "Name", with: "Tim"
+    fill_in "Last name", with: "Silva"
+    fill_in "Email", with: "silva.tim@gmail.com"
     select "Flat White", from: 'order_coffee_type'
     select "Soy milk", from: 'order_milk'
     choose "Large"
