@@ -32,7 +32,7 @@ gem 'bootstrap-sass'
 
 
 group :development, :test do
-  gem 'byebug'
+  gem 'pry-byebug', platform: [:ruby_20]
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.0'
 end

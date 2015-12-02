@@ -1,0 +1,17 @@
+## Customize the test machine
+machine:
+
+  timezone:
+    Australia/Sydney # Set the timezone
+
+  # Version of ruby to use
+  ruby:
+    version:
+      ruby 2.0.0p643
+
+## Customize deployment commands
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: timscoffeeshop
