@@ -1,34 +1,7 @@
-%h1.center Konoha Coffee Locations
-
-%table.table.table-condensed
-  %th.h3 Address
-  %th.h3 Suburb
-  %th.h3 State
-  %th.h3 Postcode
-  %th.h3 Place New Order
-  -if current_user_admin?
-    %th.h3 Current Orders List
-    %th.h3 Completed Orders List
-    %th.h3 Edit Shop
-   
-  - @shops.each do |shop|
-    %tr
-      %td= "#{shop.street_num} #{shop.street}" 
-      %td= shop.suburb
-      %td= shop.state
-      %td= shop.postcode
-      %td=link_to "New Order", new_shop_order_path(shop), class: "btn btn-default"
-      -if current_user_admin?
-        %td=link_to "Current Orders", shop_orders_path(shop), class: "btn btn-default" 
-        %td=link_to "Completed Orders", shop_orders_fulfilled_path(shop), class: "btn btn-default"
-        %td=link_to "Edit Shop", edit_shop_path(shop), class: "btn btn-default"
-
-
-  
-
-
-
-   
-       
-
-     
+%h1.center Welcome to Konoha coffee!
+= form_tag shops_state_path, :method => 'get' do
+  %h1.formheading Please select state
+  %p Find Konoha coffee locations in your area
+  .form-group
+  = select_tag :state, options_for_select(Shop::STATE), prompt: "select state", label: false
+  = submit_tag 'View Shops'

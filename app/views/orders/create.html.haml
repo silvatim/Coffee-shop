@@ -10,5 +10,6 @@
   %br
   %p
     =link_to "Place another order", shops_path, method: :get, class: "btn btn-default"
-    =link_to "View order", '#', class: "btn btn-default"
-    =link_to "Home", '#', class: "btn btn-default"
+    =link_to "Change order", edit_shop_order_path(@shop, @order), class: "btn btn-default"
+    =link_to "Cancel order", shop_order_destroy_path(@shop, @order), class: "btn btn-default"
+    =link_to "Home", shops_path, class: "btn btn-default"

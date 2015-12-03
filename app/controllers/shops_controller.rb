@@ -1,11 +1,20 @@
 class ShopsController < ApplicationController
 
 before_action :set_shop, only: [:edit, :update, :destroy]
-before_action :set_all_shops, except: [:new, :edit]
+before_action :set_all_shops, except: [:new, :show, :index, :edit]
 
 
 def index 
   
+end
+
+def show
+  @shops = Shop.all
+  if params[:state]
+    @shops = Shop.find_by(params[:state])
+  else
+    @shops = Shop.all
+  end  
 end
 
 def new

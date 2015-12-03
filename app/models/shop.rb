@@ -12,5 +12,4 @@ validates :state, inclusion: { in: STATE }
 validates :postcode, presence: true
 
 
-
 end

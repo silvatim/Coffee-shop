@@ -1,0 +1,25 @@
+= simple_form_for [@shop, @order] do |f|
+  - if @order.new_record?
+    %h1.formheading Coffee Orders
+    %p Fill in the type of coffee you would like.
+  - else
+    %h1.formheading Edit Your Order
+    %p Please change your order details.
+  .form-group
+  - if user_signed_in?
+    = f.input :first_name, label: false, input_html: {:value => @order.user.first_name}
+    = f.input :last_name, label: false, input_html: {:value => @order.user.last_name}
+    = f.input :email, label: false, input_html: {:value => @order.user.email}
+  - else
+    = f.input :first_name, label: false, autofocus: true, placeholder: 'Name'
+    = f.input :last_name, label: false, placeholder: 'Last name'
+    = f.input :email, label: false, placeholder: 'Email' 
+  = f.input :coffee_type, autofocus: true, collection: Order::COFFEE_TYPE, prompt: "Select coffee", label: false
+  = f.input :milk, collection: Order::MILK, prompt: "Select milk", label: false 
+  = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, label: false
+  = f.input :pickup_time, as: :time, ampm: true, start_hour: 7, end_hour: 18, default: Time.now
+  = f.input :comment, placeholder: "Additional comments", label: false
+  - if @order.new_record?
+    %script{src: "https://checkout.stripe.com/checkout.js", class: "stripe-button", "data-key" => Rails.configuration.stripe[:publishable_key], "data-description" => "Coffee Payment", "data-amount" => "500", "data-locale" => "auto"}
+  - else
+    = f.submit

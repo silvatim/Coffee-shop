@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 helper_method :sort_column, :sort_direction
 
 before_action :set_shop
-before_action :set_order, except: [:index, :new, :create, :fulfilled_orders]
+before_action :set_order, except: [:index, :show, :update, :edit, :new, :create, :fulfilled_orders]
 
 def index
   @orders = @shop.orders.order(sort_column + " " + sort_direction)
@@ -11,9 +11,24 @@ end
 def new
   @order = @shop.orders.new(size: 'Large')
   @order.user = current_user 
-  @start_time = 
-  @end_time 
 end
+
+def edit
+   @order = @shop.orders.find(params[:id])
+end
+
+def update
+  @order = @shop.orders.find(params[:id])
+    if @order.update(order_params)
+      render 'create', notice: "Order successfully updated"
+    else
+      render 'edit'
+    end
+  end
+
+  def show
+    redirect_to root_path,  notice: "Order successfully deleted"
+  end
 
 def create 
   @order = @shop.orders.new(order_params)
@@ -105,6 +120,10 @@ private
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def order_params
+    params.require(:order).permit(:first_name, :last_name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
   end
   
 end

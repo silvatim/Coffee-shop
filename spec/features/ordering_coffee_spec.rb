@@ -35,7 +35,7 @@ feature "Ordering a coffee" do
         fill_in "CVC", :with => "111"
         click_button "Pay $5.00"
         expect(current_path).to eq('/shops/7/orders')
-        expect(page).to have_text('THAN YOU, TIM')
+        expect(page).to have_text('THANK YOU, TIM')
       end
     end
   end      
