@@ -1,15 +1,16 @@
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = f.error_notification
-  %h1 Create account
-  %p To create an account please provide a name, email address and password.
-  = f.input :first_name, required: true, placeholder: 'first name', label: false, autofocus: true
-  = f.input :last_name, required: true, placeholder: 'last name', label:false
-  = f.input :email, required: true, placeholder: 'email', label: false 
-  = f.input :password, required: true, placeholder: 'password', label: false
-  = f.input :password_confirmation, required: true, placeholder: 'password confirmation', label: false
-  = f.input :remember_me, as: :boolean if devise_mapping.rememberable? 
-  = f.button :submit, "Log in"
-  
-  = render "users/shared/links"
-   
+.container
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = f.error_notification
+    %h1 Join now
+    %p To create an account please provide a name, email address and password.
+    = f.input :first_name, required: true, placeholder: 'first name', label: false, autofocus: true
+    = f.input :last_name, required: true, placeholder: 'last name', label:false
+    = f.input :email, required: true, placeholder: 'email', label: false
+    = f.input :password, required: true, placeholder: 'password', label: false
+    = f.input :password_confirmation, required: true, placeholder: 'password confirmation', label: false
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+    = f.button :submit, "Create account"
+
+    = render "users/shared/links"
+
 

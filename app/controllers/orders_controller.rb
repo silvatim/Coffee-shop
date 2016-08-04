@@ -1,107 +1,100 @@
 class OrdersController < ApplicationController
-helper_method :sort_column, :sort_direction
+   helper_method :sort_column, :sort_direction
+   before_action :set_shop
+   before_action :set_order, except: [:index, :show, :update, :edit, :new, :create, :fulfilled_orders]
 
-before_action :set_shop
-before_action :set_order, except: [:index, :show, :update, :edit, :new, :create, :fulfilled_orders]
+   def index
+     @orders = @shop.orders.order(sort_column + " " + sort_direction)
+   end
 
-def index
-  @orders = @shop.orders.order(sort_column + " " + sort_direction)
-end
+   def new
+     @order = @shop.orders.new(size: 'Large')
+     @order.user = current_user
+   end
 
-def new
-  @order = @shop.orders.new(size: 'Large')
-  @order.user = current_user 
-end
+   def edit
+     @order = @shop.orders.find(params[:id])
+   end
 
-def edit
-   @order = @shop.orders.find(params[:id])
-end
-
-def update
-  @order = @shop.orders.find(params[:id])
-    if @order.update(order_params)
-      render 'create', notice: "Order successfully updated"
-    else
-      render 'edit'
-    end
-  end
+   def update
+     @order = @shop.orders.find(params[:id])
+     if @order.update(order_params)
+       render 'create', notice: "Order successfully updated"
+     else
+       render 'edit'
+     end
+   end
 
   def show
-    redirect_to root_path,  notice: "Order successfully deleted"
+    redirect_to root_path, notice: "Order successfully deleted"
   end
 
-def create 
-  @order = @shop.orders.new(order_params)
-  @order.user = current_user if user_signed_in?
-  @order.save
+  def create
+    @order = @shop.orders.new(order_params)
+    @order.user = current_user if user_signed_in?
+    @order.save
 
-  UserMailer.order_email(@order).deliver_now
+    UserMailer.order_email(@order).deliver_now
+    @amount = 500
 
-  @amount = 500
+    customer = Stripe::Customer.create(
+     :email => 'example@stripe.com',
+     :card  => params[:stripeToken] )
 
-  customer = Stripe::Customer.create(
-    :email => 'example@stripe.com',
-    :card  => params[:stripeToken]
-  )
+   charge = Stripe::Charge.create(
+     :customer    => customer.id,
+     :amount      => @amount,
+     :description => 'Rails Stripe customer',
+     :currency    => 'usd' )
 
-  charge = Stripe::Charge.create(
-    :customer    => customer.id,
-    :amount      => @amount,
-    :description => 'Rails Stripe customer',
-    :currency    => 'usd'
-  )
-  
-    rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to new_shop_order_path(@shop)
+   rescue Stripe::CardError => e
+     flash[:error] = e.message
+     redirect_to new_shop_order_path(@shop)
+  end
 
-end
+  def fulfilled_orders
+  end
 
-def fulfilled_orders
-end
-
-def completed
-  @order.complete!
-  UserMailer.completed_email(@order).deliver_now
-  redirect_to shop_orders_path(@shop)
-end
+  def completed
+    @order.complete!
+    UserMailer.completed_email(@order).deliver_now
+    redirect_to shop_orders_path(@shop)
+  end
 
 
-def paid
-  @order.paid!
-  redirect_to shop_orders_path(@shop)
-end
+  def paid
+    @order.paid!
+    redirect_to shop_orders_path(@shop)
+  end
 
-def estimated
-  @order.estimate!(params[:estimate])
-  UserMailer.confirmation_email(@order).deliver_now
-  redirect_to shop_orders_path(@shop)
-end
+  def estimated
+    @order.estimate!(params[:estimate])
+    UserMailer.confirmation_email(@order).deliver_now
+    redirect_to shop_orders_path(@shop)
+  end
 
-def accept
-  @order.accept!
-  redirect_to shop_orders_path(@shop)
-end
+  def accept
+    @order.accept!
+    redirect_to shop_orders_path(@shop)
+  end
 
-def reject
-  @order.reject!
-  UserMailer.rejection_email(@order).deliver_now
-  redirect_to shop_orders_path(@shop)
-end
+  def reject
+    @order.reject!
+    UserMailer.rejection_email(@order).deliver_now
+    redirect_to shop_orders_path(@shop)
+  end
 
-def cancel
-  @order.cancel!
-  redirect_to shop_orders_path(@shop)
-end
+  def cancel
+    @order.cancel!
+    redirect_to shop_orders_path(@shop)
+  end
 
-def forgotten
-  @order.forgotten!
-  redirect_to shop_orders_path(@shop)
-end
+  def forgotten
+    @order.forgotten!
+    redirect_to shop_orders_path(@shop)
+  end
 
-
-private
-
+ private
   def order_params
     params.require(:order).permit(:first_name, :last_name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
   end
@@ -125,6 +118,6 @@ private
   def order_params
     params.require(:order).permit(:first_name, :last_name, :email, :comment, :coffee_type, :milk, :size, :pickup_time)
   end
-  
+
 end
 

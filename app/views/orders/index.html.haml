@@ -1,53 +1,54 @@
-%h2 Working Orders
-%table.table.table-condensed.pretty   
-  %th.h3= sortable 'last_name', "Surname"
-  %th.h3 Name
-  %th.h3 Coffee
-  %th.h3 Pickup time
-  %th.h3= sortable 'pickup_time' , 'Time remaining'   
-  %th.h3 Mark as completed
-  %th.h3 Cancel order
-  - @orders.working.each do |order|
-    %tr
-      %td= order.last_name
-      %td= order.first_name
-      %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
-      %td= order.pickup_time.strftime("%-I:%M %P")
-      - if order.pickup_time > Time.now
-        %td= distance_of_time_in_words(order.pickup_time, Time.now) 
-      - else
-        %td.text-danger= time_ago_in_words(order.pickup_time) +' overdue'
-      %td
-        =link_to "Completed", shop_order_completed_path(@shop, order), method: :put, class: "btn btn-default"
-      %td   
-        =link_to "Cancel", shop_order_cancel_path(@shop, order), method: :put , class: "btn btn-default"
-        
-%h2 New Orders
-%table.table.table-condensed 
-  %th.h3= sortable "last_name", "Surname"
-  %th.h3 Name
-  %th.h3 Coffee
-  %th.h3 Order placed
-  %th.h3 Desired pickup 
-  %th.h3 Count down
-  %th.h3 Accept
-  %th.h3 Reject
-  %th.h3 Offer alternative
-  - @orders.new_orders.each do |order|
-    %tr 
-      %td= order.last_name   
-      %td= order.first_name
-      %td= "#{order.coffee_type} / #{order.milk} / #{order.size}"
-      %td= order.created_at.strftime("%-I:%M %P")
-      %td= order.pickup_time.strftime("%-I:%M %P")
-      %td= distance_of_time_in_words(order.pickup_time, Time.now)
-      %td
-        =link_to "Accept", shop_order_accept_path(@shop, order), method: :put, class: "btn btn-default"
-      %td
-        =link_to "Reject", shop_order_reject_path(@shop, order), method: :put, class: "btn btn-default"
-      %td
-        =link_to "5 min", shop_order_estimated_path(@shop, order, estimate: order.pickup_time + 5.minutes), method: :put, class: "btn"
-        =link_to "10 min", shop_order_estimated_path(@shop, order, estimate: order.pickup_time + 10.minutes), method: :put, class: "btn"
-        =link_to "15 min", shop_order_estimated_path(@shop, order, estimate: order.pickup_time + 15.minutes), method: :put, class: "btn"
-      
+.container
+  %h2 Working Orders
+  %table.table.table-condensed.pretty
+    %th.h3= sortable 'last_name', "Surname"
+    %th.h3 Name
+    %th.h3 Coffee
+    %th.h3 Pickup time
+    %th.h3= sortable 'pickup_time' , 'Time remaining'
+    %th.h3 Mark as completed
+    %th.h3 Cancel order
+    - @orders.working.each do |order|
+      %tr
+        %td= order.last_name
+        %td= order.first_name
+        %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
+        %td= order.pickup_time.strftime("%-I:%M %P")
+        - if order.pickup_time > Time.now
+          %td= distance_of_time_in_words(order.pickup_time, Time.now)
+        - else
+          %td.text-danger= time_ago_in_words(order.pickup_time) +' overdue'
+        %td
+          =link_to "Completed", shop_order_completed_path(@shop, order), method: :put, class: "btn btn-default"
+        %td
+          =link_to "Cancel", shop_order_cancel_path(@shop, order), method: :put , class: "btn btn-default"
+
+  %h2 New Orders
+  %table.table.table-condensed
+    %th.h3= sortable "last_name", "Surname"
+    %th.h3 Name
+    %th.h3 Coffee
+    %th.h3 Order placed
+    %th.h3 Desired pickup
+    %th.h3 Count down
+    %th.h3 Accept
+    %th.h3 Reject
+    %th.h3 Offer alternative
+    - @orders.new_orders.each do |order|
+      %tr
+        %td= order.last_name
+        %td= order.first_name
+        %td= "#{order.coffee_type} / #{order.milk} / #{order.size}"
+        %td= order.created_at.strftime("%-I:%M %P")
+        %td= order.pickup_time.strftime("%-I:%M %P")
+        %td= distance_of_time_in_words(order.pickup_time, Time.now)
+        %td
+          =link_to "Accept", shop_order_accept_path(@shop, order), method: :put, class: "btn btn-default"
+        %td
+          =link_to "Reject", shop_order_reject_path(@shop, order), method: :put, class: "btn btn-default"
+        %td
+          =link_to "5 min", shop_order_estimated_path(@shop, order, estimate: order.pickup_time + 5.minutes), method: :put, class: "btn"
+          =link_to "10 min", shop_order_estimated_path(@shop, order, estimate: order.pickup_time + 10.minutes), method: :put, class: "btn"
+          =link_to "15 min", shop_order_estimated_path(@shop, order, estimate: order.pickup_time + 15.minutes), method: :put, class: "btn"
+
 

@@ -1,20 +1,21 @@
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  %h1 Edit account
-  %p Edit account details
-  = f.input :first_name, required: true, autofocus: true, label: false, placeholder: 'name' 
-  = f.input :last_name, required: true, label: false, placeholder: 'surname'
-  = f.input :email, required: true, label: false, placeholder: 'email' 
+.container
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = f.error_notification
+    %h1 Edit account
+    %p Edit account details
+    = f.input :first_name, required: true, autofocus: true, label: false, placeholder: 'name'
+    = f.input :last_name, required: true, label: false, placeholder: 'surname'
+    = f.input :email, required: true, label: false, placeholder: 'email'
 
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
-    %p= "Currently waiting confirmation for: #{resource.unconfirmed_email}" 
-    
-  = f.input :password, autocomplete: "off", placeholder: 'new password', hint: "leave it blank if you don't want to change it", required: false, label: false
-  = f.input :password_confirmation, required: false, placeholder: 'password confirmation', label: false 
-  = f.input :current_password, placeholder: 'current password', hint: "we need your current password to confirm your changes", required: true, label: false 
-  = f.button :submit, "Update", label: false
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %p= "Currently waiting confirmation for: #{resource.unconfirmed_email}"
 
-  = link_to "Cancel my account", registration_path(resource_name), data: { confirm: 'Are you sure?' }, method: :delete
-  %br
-  = link_to "Back", :back 
+    = f.input :password, autocomplete: "off", placeholder: 'new password', hint: "leave it blank if you don't want to change it", required: false, label: false
+    = f.input :password_confirmation, required: false, placeholder: 'password confirmation', label: false
+    = f.input :current_password, placeholder: 'current password', hint: "we need your current password to confirm your changes", required: true, label: false
+    = f.button :submit, "Update", label: false
+
+    = link_to "Cancel my account", registration_path(resource_name), data: { confirm: 'Are you sure?' }, method: :delete
+    %br
+    = link_to "Back", :back
 

@@ -1,0 +1,30 @@
+.navbar.navbar-static-top.navbar-inverse{:role => "navigation"}
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-brand Konoha Coffee
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a=link_to "Home", root_path
+        %li
+          %a=link_to "About Us", about_us_path
+        %li
+          %a=link_to "Contact Us", contact_us_path
+        - if user_signed_in?
+          %li
+            %a=link_to 'Edit Account', edit_user_registration_path
+          %li
+            %a=link_to 'View Orders', user_orders_path(current_user)
+          %li
+            %a=link_to 'Sign Out', destroy_user_session_path, method: :delete
+        - else
+          %li
+            %a=link_to "Sign Up", new_user_registration_path
+          %li
+            %a=link_to "Log In", new_user_session_path
+

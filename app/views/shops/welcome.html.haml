@@ -1,0 +1,38 @@
+.carousel{id: "myCarousel"}
+  %ol.carousel-indicators
+    %li.active{data: {target: "#myCarousel", slide_to: "0"}}
+    %li{data: {target: "#myCarousel", slide_to: "1"}}
+    %li{data: {target: "#myCarousel", slide_to: "2"}}
+    %li{data: {target: "#myCarousel", slide_to: "3"}}
+
+  .carousel-inner
+    .item.active=image_tag("redbeans.jpg", alt: "pic one", class: "first-slide")
+    .item=image_tag("coffee1.jpg", alt:"pic two", class:"second-slide")
+    .item=image_tag("makingcoffee.jpg", alt: "pic three", class: "third-slide")
+    .item=image_tag("latte.jpg", alt: "pic three", class: "forth-slide")
+
+  %a.left.carousel-control{href: "#myCarousel", data:{slide: "prev"}}
+    %span.glyphicon.glyphicon-chevron-left
+  %a.right.carousel-control{href: "#myCarousel", data:{slide: "next"}}
+    %span.glyphicon.glyphicon-chevron-right
+
+.container
+  .col-md-12
+    .welcome-header
+      %h1.text-center  Konoha Coffee
+  .grid.col-md-2.col-md-offset-2
+    .img-circle=image_tag('coffee_circle.jpg', size: "140x130", alt:'coffee pic')
+    %h3 Join Now
+    %p Become a member to access great deals and awesome coffee
+    =link_to 'Sign Up', new_user_registration_path, method: :get, class: "btn btn-default"
+  .grid.col-md-2.col-md-offset-1
+    .img-circle=image_tag('coffee_cup.png', size: "140x130", alt:'coffee pic')
+    %h3 Log In
+    %p Sign in to access all your details and favourite orders
+    =link_to 'Sign In', new_user_session_path, method: :get, class: "btn btn-default"
+  .grid.col-md-2.col-md-offset-1
+    .img-circle=image_tag('take_away.jpg', size: "140x130", alt:'coffee pic')
+    %h3 Quickie Order
+    %p I just really need a coffee now! Take me to the order page
+    =link_to 'Quick Coffee', shops_path, method: :get, class: "btn btn-default"
+

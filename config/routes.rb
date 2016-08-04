@@ -2,18 +2,23 @@ Rails.application.routes.draw do
 
 
 
-devise_for :users 
- root 'shops#index'
-
+devise_for :users
+root 'shops#welcome'
+get  'shops/about' => 'shops#about', as: :about_us
+get  'shops/contact' => 'shops#contact', as: :contact_us
 get 'users/:user_id/orders' => 'users#index', as: :user_orders
 get 'users/:user_id/orders/:id' => 'users#show_order', as: :user_order
 get 'users/:user_id/orders/:id/edit' => 'users#edit_order', as: :edit_user_order
 patch 'users/:user_id/orders/:id' => 'users#update_order', as: :update_user_order
 delete 'users/:user_id/orders/:id/cancel' => 'users#cancel_order', as: :cancel_user_order
-delete '/shops/:shop_id/orders/:id' => 'orders#destroy', as: :shop_order_destroy  
-get 'shops/:state/' => 'shops#show', as: :shops_state 
+delete '/shops/:shop_id/orders/:id' => 'orders#destroy', as: :shop_order_destroy
+
+
+
+
   resources :shops do
     get 'orders/fulfilled' => 'orders#fulfilled_orders', as: :orders_fulfilled
+
     resources :orders do
        put 'completed'
        put 'estimated'
@@ -22,8 +27,8 @@ get 'shops/:state/' => 'shops#show', as: :shops_state
        put 'forgotten'
        put 'reject'
        put 'accept'
-   
-  end     
+
+  end
 
  end
 

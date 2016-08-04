@@ -1,26 +1,27 @@
-- if @user.orders.any?
-  %h1.center= "#{@user.first_name}'s orders"
-  %table.table.table-condensed
-    %th.h3 Coffee
-    %th.h3 Location
-    %th.h3 Order status
-    %th.h3 Cancel order
-    %th.h3 Change order
-   
-    - @user.orders.each do |order|
-      %tr
-        %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
-        %td= "#{order.shop.street_num} #{order.shop.street}, #{order.shop.suburb}, #{order.shop.state}"
-        %td= order.state
-        - if order_new(order)
-          %td   
-            =link_to "Cancel order", cancel_user_order_path(@user, order), method: :delete, class: "btn btn-default"
-          %td
-            =link_to "Change order", edit_user_order_path(@user, order), method: :get, class: "btn btn-default"
-        - else 
-          %td Order in progress.... 
-          %td Unable to cancel or change order
+.container
+  - if @user.orders.any?
+    %h1.center= "#{@user.first_name}'s orders"
+    %table.table.table-condensed
+      %th.h3 Coffee
+      %th.h3 Location
+      %th.h3 Order status
+      %th.h3 Cancel order
+      %th.h3 Change order
 
-- else
-  %h3.center= "No orders exist currently for #{@user.first_name}"
-     
+      - @user.orders.each do |order|
+        %tr
+          %td= "#{order.size} #{order.coffee_type} with #{order.milk}"
+          %td= "#{order.shop.street_num} #{order.shop.street}, #{order.shop.suburb}, #{order.shop.state}"
+          %td= order.state
+          - if order_new(order)
+            %td
+              =link_to "Cancel order", cancel_user_order_path(@user, order), method: :delete, class: "btn btn-default"
+            %td
+              =link_to "Change order", edit_user_order_path(@user, order), method: :get, class: "btn btn-default"
+          - else
+            %td Order in progress....
+            %td Unable to cancel or change order
+
+  - else
+    %h3.center= "No orders exist currently for #{@user.first_name}"
+

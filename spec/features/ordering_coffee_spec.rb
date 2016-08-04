@@ -1,4 +1,4 @@
-feature "Ordering a coffee" do
+feature "Ordering a coffee", js: true do
   background do
     visit new_shop_path
     fill_in 'street number', with: '10'
@@ -22,45 +22,44 @@ feature "Ordering a coffee" do
     select "03", from: 'order_pickup_time_4i'
     select "30", from: 'order_pickup_time_5i'
     fill_in "Additional comments", with: 'extra hot'
+    click_button 'Pay with Card'
+    stripe_iframe = all('iframe[name=stripe_checkout_app]').last
+    Capybara.within_frame stripe_iframe do
+      fill_in "Email", :with => "railstestacc@gmail.com"
+      fill_in "Card number", :with => "4242424242424242"
+      fill_in "MM/YY", :with => "1219"
+      fill_in "CVC", :with => "111"
+      click_button "Pay $5.00"
+      expect(current_path).to eq('/shops/7/orders')
+      expect(page).to have_text('THAN YOU, TIM')
+    end
+    open_email('silva.tim@gmail.com')
+    #expect the current email to have coffee order confirmation in it
+
   end
 
-  describe "show Stripe checkout", :js => true do
-    before do
-      click_button 'Pay with Card'
-      stripe_iframe = all('iframe[name=stripe_checkout_app]').last
-      Capybara.within_frame stripe_iframe do        
-        fill_in "Email", :with => "railstestacc@gmail.com"
-        fill_in "Card number", :with => "4242424242424242"
-        fill_in "MM/YY", :with => "1219"
-        fill_in "CVC", :with => "111"
-        click_button "Pay $5.00"
-        expect(current_path).to eq('/shops/7/orders')
-        expect(page).to have_text('THANK YOU, TIM')
-      end
-    end
-  end      
 end
 
-#feature 'Emailer' do
-#  background do
-        #will clear the message queue
-    #clear_emails
-    #visit email_trigger_path
-         #Will find an email sent to test@example.com
-         #and set `current_email`
-    #open_email('silva.tim@gmail.com')
-  #end
+# feature 'Emailer' do
+  # background do
+    # # will clear the message queue
+    # clear_emails
+    # visit email_trigger_path
+    # # Will find an email sent to test@example.com
+    # # and set `current_email`
+    # open_email('silva.tim@gmail.com')
+  # end
 
-  #scenario 'following a link' do
-  #  current_email.click_link 'your profile'
-  #  expect(page).to have_content 'Profile page'
-  #end
+  # scenario 'following a link' do
+    # current_email.click_link 'your profile'
+    # expect(page).to have_content 'Profile page'
+  # end
 
-  #scenario 'testing for content' do
-  #  expect(current_email).to have_content 'Welcome to Konoha Coffee, Tim'
-  #end
+  # scenario 'testing for content' do
+    # expect(current_email).to have_content 'Welcome to Konoha Coffee, Tim'
+  # end
 
-  #end
+# end
 
 
 

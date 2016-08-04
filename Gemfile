@@ -35,6 +35,7 @@ group :development, :test do
   gem 'pry-byebug', platform: [:ruby_20]
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.0'
+  gem 'capybara-screenshot'
 end
 
 group :test do
@@ -42,6 +43,8 @@ group :test do
   gem 'capybara-webkit'
   gem 'poltergeist'
   gem 'capybara-email'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do
