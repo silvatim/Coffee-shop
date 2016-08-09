@@ -15,6 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
-*.DS_Store
-*.pairs
-*.rspec
+.DS_STORE
+.pairs
+.rspec
