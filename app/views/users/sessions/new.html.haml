@@ -1,12 +1,12 @@
 .container
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    - flash.each do |key, value|
-      %div{ :class => ['flash', key] }= value
+    = f.error_notification
     %h1 Sign in
     %p To sign in use your email and password you registered with.
     = f.input :email, required: true, placeholder: 'email', autofocus: true, label: false
     = f.input :password, placeholder: 'password', required: true, label: false
     = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
     = f.button :submit, "Log in"
+
     = render "users/shared/links"
 

@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
 before_action :set_user
 before_action :set_order, except: [:index]
 
@@ -12,12 +11,11 @@ before_action :set_order, except: [:index]
 
   def update_order
     if @order.update(order_params)
-  	  redirect_to user_orders_path(@user), notice: "Order successfully updated"
+      redirect_to user_orders_path(@user), notice: "Order successfully updated"
     else
-  	  render 'edit'
+      render 'edit'
     end
   end
-
 
   def cancel_order
     @order.destroy

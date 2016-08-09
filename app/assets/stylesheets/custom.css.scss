@@ -13,9 +13,14 @@
  flex:1;
  }
 
-body {
+.alert{
+margin-bottom: 0px;
+border-radius:0px;
+}
 
-    font-family: 'Josefin Sans', sans-serif;
+
+body {
+ font-family: 'Josefin Sans', sans-serif;
  }
 
  h3{
@@ -27,14 +32,6 @@ body {
   text-align:center;
   font-size:16px;
   }
-
- p.alert.alert-success{
-    background-color:#dff0d8;
-    border-color:#d6e9c6;
-    color:#3c763d;
-    margin-bottom:0;
-  }
-
 
  .img-circle{
   img{
@@ -57,4 +54,5 @@ body {
   font-size:70px;
   }
 }
+
 

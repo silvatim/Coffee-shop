@@ -21,6 +21,6 @@
     = f.input :pickup_time, as: :time, ampm: true, start_hour: 7, end_hour: 18, default: Time.now
     = f.input :comment, placeholder: "Additional comments", label: false
     - if @order.new_record?
-      %script{src: "https://checkout.stripe.com/checkout.js", class: "stripe-button", "data-key" => Rails.configuration.stripe[:publishable_key], "data-description" => "Coffee Payment", "data-amount" => "500", "data-locale" => "auto"}
+      %script{src: "https://checkout.stripe.com/checkout.js", class: "stripe-button", "data-image" => image_path("coffee.png"), "data-key" => Rails.configuration.stripe[:publishable_key], "data-description" => "Coffee Payment $5.00", "data-amount" => "500", "data-locale" => "auto"}
     - else
       = f.submit

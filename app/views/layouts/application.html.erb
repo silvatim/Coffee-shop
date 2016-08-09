@@ -10,12 +10,16 @@
   <%= render 'layouts/header' %>
 
   <main class="Site-content">
+
   <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
+    <%=render 'layouts/messages' %>
   <% end %>
 
 	<%= yield %>
+
   </main>
+
   <%= render 'layouts/footer' %>
+
 </body>
 </html>
