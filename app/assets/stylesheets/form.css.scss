@@ -42,7 +42,7 @@ form{
       -webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.7);
       -moz-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.7);
       box-shadow: 0 8px 6px -6px rgba(0,0,0,0.7);
-      border-top:1px solid rgba(255,255,255,0.8)!important;
+      border-top:1px solid rgba(255,255,255,0.8);
       }
     .form-control{
       width:98%;
@@ -61,14 +61,15 @@ form{
      color:#6E6E6E
      }
     .btn.btn-default{
-     width:98%;
+       width:98%;
 
     }
 
    }
 
 .btn.btn-default {
-      width:160px;
+      max-width:95%;
+      min-width:120px;
       margin-bottom: 15px;
       padding:15px;
       border-radius:5px;
@@ -90,4 +91,6 @@ form{
     }
 
 
-
+.btn-group-vertical {
+   width:100%;
+}

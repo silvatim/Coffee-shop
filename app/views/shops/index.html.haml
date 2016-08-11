@@ -1,8 +1,7 @@
 .container
-  %h1 Konoha Coffee
-  %table.table.table-sm
+  %table.table.table-condensed.table-hover
     %tr
-      %h3 Locations
+      %h2 Konoha Coffee Shop Locations
     - @shops.each do |shop|
       %tr
         %td= "#{shop.street_num} #{shop.street}"
@@ -11,9 +10,19 @@
         %td= shop.postcode
         %td=link_to "Place Order", new_shop_order_path(shop), class: "btn btn-default"
         -if current_user_admin?
-          %td=link_to "Current Orders", shop_orders_path(shop), class: "btn btn-default"
-          %td=link_to "Completed Orders", shop_orders_fulfilled_path(shop), class: "btn btn-default"
-          %td=link_to "Edit Shop", edit_shop_path(shop), class: "btn btn-default"
+          %td
+            .btn-group-vertical
+              .btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+                Shop Details
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  =link_to "Current Orders", shop_orders_path(shop), class: "btn btn-default"
+                %li
+                  =link_to "Completed Orders", shop_orders_fulfilled_path(shop), class: "btn btn-default"
+                %li
+                  =link_to "Edit Shop", edit_shop_path(shop), class: "btn btn-default"
+
 
 
 

@@ -16,6 +16,10 @@ before_action :set_order, except: [:index]
       render 'edit'
     end
   end
+  def destroy
+    @order.destroy
+    redirect_to user_orders_path(@user)
+  end
 
   def cancel_order
     @order.destroy

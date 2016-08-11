@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
    helper_method :sort_column, :sort_direction
    before_action :set_shop
-   before_action :set_order, except: [:index, :show, :update, :edit, :new, :create, :fulfilled_orders]
+   before_action :set_order, except: [:index, :show, :update, :edit, :new, :create, :fulfilled_orders, :destroy]
 
    def index
      @orders = @shop.orders.order(sort_column + " " + sort_direction)
@@ -27,6 +27,12 @@ class OrdersController < ApplicationController
 
   def show
     redirect_to root_path, notice: "Order successfully deleted"
+  end
+
+  def destroy
+    @order= @shop.orders.find(params[:id])
+    @order.destroy
+    redirect_to shop_orders_fulfilled_path(@shop)
   end
 
   def create
@@ -93,6 +99,7 @@ class OrdersController < ApplicationController
     @order.forgotten!
     redirect_to shop_orders_path(@shop)
   end
+
 
  private
   def order_params
