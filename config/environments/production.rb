@@ -24,13 +24,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   address:              'smtp.sendgrid.net',
-  port:                 '587',
+  port:                  587,
   domain:               'heroku.com',
   user_name:             ENV['SENDGRID_USERNAME'],
   password:              ENV['SENDGRID_PASSWORD'],
   authentication:       'plain',
-  enable_starttls_auto: true  
-  } 
+  enable_starttls_auto: true
+  }
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.

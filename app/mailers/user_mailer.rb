@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
 
-   default from: ENV['SENDGRID_USERNAME']
- 
+  default from: ENV['GMAIL_USERNAME']
+
   def order_email(order)
     @order = order
     @url  = 'http://coffeeapp.com/login'

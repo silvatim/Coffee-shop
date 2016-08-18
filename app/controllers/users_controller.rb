@@ -1,27 +1,24 @@
 class UsersController < ApplicationController
-before_action :set_user
-before_action :set_order, except: [:index]
+
+  before_action :set_user
+  before_action :set_order, except: [:index]
 
   def index
     @orders = @user.orders
   end
 
-  def edit_order
+  def edit
   end
 
-  def update_order
+  def update
     if @order.update(order_params)
       redirect_to user_orders_path(@user), notice: "Order successfully updated"
     else
       render 'edit'
     end
   end
-  def destroy
-    @order.destroy
-    redirect_to user_orders_path(@user)
-  end
 
-  def cancel_order
+  def destroy
     @order.destroy
     redirect_to user_orders_path(@user)
   end

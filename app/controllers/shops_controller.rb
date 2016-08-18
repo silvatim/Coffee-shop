@@ -1,13 +1,7 @@
 class ShopsController < ApplicationController
 
-  before_action :set_shop, only:[:edit, :update, :destroy]
-  before_action :set_all_shops, except:[:new, :show, :edit, :welcome]
-
-  def welcome
-  end
-
-  def about
-  end
+  before_action :set_shop, only:[:edit, :update, :show, :destroy]
+  before_action :set_all_shops, except:[:new, :show, :edit]
 
   def index
   end
@@ -26,6 +20,9 @@ class ShopsController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def update

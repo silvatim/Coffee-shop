@@ -1,7 +1,7 @@
 .container
   %table.table.table-condensed.table-hover
     %tr
-      %h2 Konoha Coffee Shop Locations
+      %h2= ('Konoha Coffee Shop Location').pluralize(@shops.count)
     - @shops.each do |shop|
       %tr
         %td= "#{shop.street_num} #{shop.street}"
@@ -19,10 +19,9 @@
                 %li
                   =link_to "Current Orders", shop_orders_path(shop), class: "btn btn-default"
                 %li
-                  =link_to "Completed Orders", shop_orders_fulfilled_path(shop), class: "btn btn-default"
+                  =link_to "Completed Orders", shop_path(shop), method: :get, class: "btn btn-default"
                 %li
                   =link_to "Edit Shop", edit_shop_path(shop), class: "btn btn-default"
-
 
 
 

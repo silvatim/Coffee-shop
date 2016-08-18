@@ -17,7 +17,7 @@
       = f.input :email, label: false, placeholder: 'Email'
     = f.input :coffee_type, autofocus: true, collection: Order::COFFEE_TYPE, prompt: "Select coffee", label: false
     = f.input :milk, collection: Order::MILK, prompt: "Select milk", label: false
-    = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, label: false
+    = f.input :size, collection: Order::SIZE, as: :radio_buttons, wrapper: :vertical_radio_and_checkboxes, checked: :Large, label: false
     = f.input :pickup_time, as: :time, ampm: true, start_hour: 7, end_hour: 18, default: Time.now
     = f.input :comment, placeholder: "Additional comments", label: false
     - if @order.new_record?
