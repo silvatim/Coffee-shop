@@ -10,4 +10,19 @@ Customers are sent an email when order is taken, postponed, cancelled or ready.
 
 This simple fully responsive site illustrates Ruby on Rails, JavaScript, HTML, CSS. It uses Bootstrap, Devise, PostgreSQL and Stripe.
 
-
+=== Welcome page
+https://cloud.githubusercontent.com/assets/13911984/17844787/79d57aec-6880-11e6-800f-5e75ae413c55.png
+=== Log in
+https://cloud.githubusercontent.com/assets/13911984/17845052/3834f264-6882-11e6-9f1a-7baa2ab222e2.png
+=== Register
+https://cloud.githubusercontent.com/assets/13911984/17845064/4c598624-6882-11e6-80da-05914e6aac54.png
+=== Order form
+https://cloud.githubusercontent.com/assets/13911984/17845076/69122df2-6882-11e6-89a7-3f5c9d51d4bb.png
+=== Shop orders
+https://cloud.githubusercontent.com/assets/13911984/17845089/81c28d4c-6882-11e6-8f9a-e0778c4d5679.png
+=== Individuals orders
+https://cloud.githubusercontent.com/assets/13911984/17845103/939cca1e-6882-11e6-968f-7ef5b8a486d2.png
+=== Payment form
+https://cloud.githubusercontent.com/assets/13911984/17845108/a155bd8c-6882-11e6-80b5-23f8bf077813.png
+=== Responsive design
+https://cloud.githubusercontent.com/assets/13911984/17845114/b00a06f8-6882-11e6-87d4-1c0df1d8f2a3.png
