@@ -9,3 +9,5 @@ Coffee shop owners can accept, reject or postpone orders and can support multipl
 Customers are sent an email when order is taken, postponed, cancelled or ready.
 
 This simple fully responsive site illustrates Ruby on Rails, JavaScript, HTML, CSS. It uses Bootstrap, Devise, PostgreSQL and Stripe.
+
+image_tag('welcome_page.png')
