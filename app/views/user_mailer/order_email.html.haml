@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Welcome to Konoha Coffee, #{@order.first_name}
+    %p
+      = "Your order : #{@order.size} #{@order.coffee_type} with #{@order.milk}"
+      \.
+      %br/
+    %p Thanks for ordering - please await a confirmation email and have a great day!

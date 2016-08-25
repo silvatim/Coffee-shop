@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Sorry: #{@order.first_name}
+    %p
+      = "Your order : #{@order.size} #{@order.coffee_type} with #{@order.milk}"
+      \.
+      %br/
+    %p Is unfortunately unable to be completed at this time due to .....
